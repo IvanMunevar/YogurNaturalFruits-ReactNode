@@ -1,0 +1,322 @@
+.productos-page {
+    width: 100%;
+}
+
+/* =========================
+   ENCABEZADO
+========================= */
+
+.productos-cabecera {
+    margin-bottom: 25px;
+}
+
+.productos-cabecera h1 {
+    color: #163d29;
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.productos-cabecera p {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* =========================
+   FORMULARIO
+========================= */
+
+.productos-formulario-contenedor {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.titulo-seccion {
+    margin-bottom: 22px;
+}
+
+.titulo-seccion h2 {
+    color: #1a3a2a;
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.titulo-seccion p {
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+.productos-formulario {
+    display: grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap: 20px;
+}
+
+.campo-producto {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.campo-producto label {
+    color: #374151;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.campo-producto input,
+.campo-producto textarea {
+
+    width: 100%;
+    padding: 11px 13px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    outline: none;
+    font-size: 14px;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+.campo-producto input:focus,
+.campo-producto textarea:focus {
+
+    border-color: #2d7a4a;
+    box-shadow:
+        0 0 0 3px rgba(45, 122, 74, 0.12);
+}
+
+.campo-producto textarea {
+    resize: vertical;
+}
+
+.descripcion {
+    grid-column: 1 / -1;
+}
+
+.acciones-formulario {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 12px;
+}
+
+/* =========================
+   BOTONES
+========================= */
+
+.btn-guardar-producto {
+
+    border: none;
+    background: #1f6b43;
+    color: white;
+    padding: 11px 18px;
+    border-radius: 7px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-guardar-producto:hover {
+    background: #175735;
+}
+
+.btn-cancelar-producto {
+
+    border: 1px solid #d1d5db;
+    background: white;
+    color: #374151;
+    padding: 11px 18px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.btn-cancelar-producto:hover {
+    background: #f3f4f6;
+}
+
+/* =========================
+   LISTADO
+========================= */
+
+.productos-listado {
+
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.titulo-listado {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.titulo-listado h2 {
+
+    color: #1a3a2a;
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.titulo-listado p {
+
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+/* =========================
+   TABLA
+========================= */
+
+.tabla-contenedor {
+
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tabla-productos {
+
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 850px;
+}
+
+.tabla-productos thead {
+
+    background: #f0f7f3;
+}
+
+.tabla-productos th {
+
+    text-align: left;
+    padding: 13px;
+    color: #1a3a2a;
+    font-size: 13px;
+    border-bottom: 1px solid #dfe7e2;
+}
+
+.tabla-productos td {
+
+    padding: 13px;
+    border-bottom: 1px solid #eeeeee;
+    color: #4b5563;
+    font-size: 14px;
+}
+
+.tabla-productos tbody tr:hover {
+
+    background: #fafcfb;
+}
+
+.nombre-producto-tabla {
+
+    font-weight: 600;
+    color: #1a3a2a !important;
+}
+
+/* =========================
+   STOCK
+========================= */
+
+.stock {
+
+    display: inline-block;
+    min-width: 38px;
+    padding: 4px 8px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.stock-normal {
+
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.stock-bajo {
+
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+/* =========================
+   ACCIONES
+========================= */
+
+.acciones-tabla {
+
+    display: flex;
+    gap: 8px;
+}
+
+.btn-editar,
+.btn-eliminar {
+
+    border: none;
+    padding: 7px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.btn-editar {
+
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.btn-editar:hover {
+
+    background: #dbeafe;
+}
+
+.btn-eliminar {
+
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.btn-eliminar:hover {
+
+    background: #fee2e2;
+}
+
+.sin-productos {
+
+    text-align: center;
+    padding: 35px !important;
+    color: #9ca3af !important;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .productos-formulario {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .productos-formulario {
+
+        grid-template-columns: 1fr;
+    }
+
+}

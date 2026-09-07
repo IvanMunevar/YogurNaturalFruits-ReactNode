@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.login-page {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+        135deg,
+        #1a3a2a 0%,
+        #2d5a3d 50%,
+        #1a3a2a 100%
+    );
+
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* =========================
+   TARJETA DEL LOGIN
+========================= */
+
+.login-card {
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    padding: 48px 40px;
+
+    width: 100%;
+    max-width: 420px;
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.login-logo {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.logo-imagen {
+    width: 120px;
+    height: auto;
+    display: block;
+    margin: 0 auto 15px;
+    object-fit: contain;
+}
+
+
+.login-logo h1 {
+    font-size: 22px;
+    color: #1a3a2a;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.login-logo p {
+    margin-top: 4px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+/* =========================
+   FORMULARIO
+========================= */
+
+.campo-grupo {
+    margin-bottom: 20px;
+}
+
+.campo-grupo label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.campo-grupo input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #111827;
+    outline: none;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+.campo-grupo input:focus {
+    border-color: #2d7a4a;
+    box-shadow:
+        0 0 0 3px rgba(45, 122, 74, 0.15);
+}
+
+/* =========================
+   BOTÓN
+========================= */
+
+.btn-ingresar {
+    width: 100%;
+    padding: 14px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 8px;
+
+    background: linear-gradient(
+        135deg,
+        #2d7a4a,
+        #1a5c35
+    );
+
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        opacity 0.2s,
+        transform 0.1s;
+}
+
+.btn-ingresar:hover {
+    opacity: 0.92;
+}
+
+.btn-ingresar:active {
+    transform: scale(0.98);
+}
+
+/* =========================
+   MENSAJES
+========================= */
+
+.mensaje-error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.login-footer {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 12px;
+    color: #9ca3af;
+}
