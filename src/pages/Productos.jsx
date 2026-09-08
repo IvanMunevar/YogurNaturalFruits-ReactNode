@@ -1,7 +1,23 @@
-import { useState } from 'react'
+import {
+  useEffect,
+  useState
+} from 'react'
+
+import {
+  obtenerProductos,
+  crearProducto,
+  actualizarProducto,
+  eliminarProducto as eliminarProductoAPI
+} from '../services/productoService'
+
 import '../styles/Productos.css'
 
+
 function Productos() {
+
+  const [cargando, setCargando] = useState(true)
+
+  const [error, setError] = useState('')
 
   const [productos, setProductos] = useState([])
 
@@ -14,15 +30,66 @@ function Productos() {
 
   const [editandoId, setEditandoId] = useState(null)
 
+  // =========================
+  // MANEJO DEL FORMULARIO
+  // =========================
+
   const manejarCambio = (evento) => {
 
     const { name, value } = evento.target
 
-    setFormulario({
-      ...formulario,
+    setFormulario((formularioAnterior) => ({
+      ...formularioAnterior,
       [name]: value
-    })
+    }))
   }
+
+  // =========================
+  // CARGAR PRODUCTOS
+  // =========================
+
+  const cargarProductos = async () => {
+
+    try {
+
+      setCargando(true)
+      setError('')
+
+      const datos = await obtenerProductos()
+
+      console.log(
+        'Productos recibidos:',
+        datos
+      )
+
+      if (!Array.isArray(datos)) {
+        throw new Error(
+          'La API no devolvió una lista de productos.'
+        )
+      }
+
+      setProductos(datos)
+
+    } catch (error) {
+
+      console.error(error)
+
+      setProductos([])
+
+      setError(
+        'No fue posible cargar los productos.'
+      )
+
+    } finally {
+
+      setCargando(false)
+    }
+  }
+
+
+  useEffect(() => {
+    cargarProductos()
+  }, [])
 
   const limpiarFormulario = () => {
 
@@ -36,105 +103,142 @@ function Productos() {
     setEditandoId(null)
   }
 
-  const guardarProducto = (evento) => {
+  const guardarProducto = async (evento) => {
 
-    evento.preventDefault()
+  evento.preventDefault()
 
-    if (
-      formulario.nombreProducto.trim() === '' ||
-      formulario.precio === '' ||
-      formulario.stock === ''
-    ) {
-      alert('Debe completar los campos obligatorios.')
-      return
-    }
+  if (
+    formulario.nombreProducto.trim() === '' ||
+    formulario.precio === '' ||
+    formulario.stock === ''
+  ) {
 
-    if (Number(formulario.precio) <= 0) {
-      alert('El precio debe ser mayor a cero.')
-      return
-    }
+    alert(
+      'Debe completar los campos obligatorios.'
+    )
 
-    if (Number(formulario.stock) < 0) {
-      alert('El stock no puede ser negativo.')
-      return
-    }
+    return
+  }
+
+
+  if (Number(formulario.precio) <= 0) {
+
+    alert(
+      'El precio debe ser mayor a cero.'
+    )
+
+    return
+  }
+
+
+  if (Number(formulario.stock) < 0) {
+
+    alert(
+      'El stock no puede ser negativo.'
+    )
+
+    return
+  }
+
+
+  const producto = {
+
+    nombreProducto:
+      formulario.nombreProducto,
+
+    descripcion:
+      formulario.descripcion,
+
+    precio:
+      Number(formulario.precio),
+
+    stock:
+      Number(formulario.stock)
+  }
+
+
+  try {
 
     if (editandoId !== null) {
 
-      const productosActualizados = productos.map((producto) => {
+      await actualizarProducto(
+        editandoId,
+        producto
+      )
 
-        if (producto.idProducto === editandoId) {
-
-          return {
-            ...producto,
-            nombreProducto: formulario.nombreProducto,
-            descripcion: formulario.descripcion,
-            precio: Number(formulario.precio),
-            stock: Number(formulario.stock)
-          }
-        }
-
-        return producto
-      })
-
-      setProductos(productosActualizados)
+      alert(
+        'Producto actualizado correctamente.'
+      )
 
     } else {
 
-      const nuevoProducto = {
+      await crearProducto(producto)
 
-        idProducto:
-          productos.length > 0
-            ? Math.max(...productos.map((producto) => producto.idProducto)) + 1
-            : 1,
-
-        nombreProducto: formulario.nombreProducto,
-        descripcion: formulario.descripcion,
-        precio: Number(formulario.precio),
-        stock: Number(formulario.stock)
-      }
-
-      setProductos([
-        ...productos,
-        nuevoProducto
-      ])
+      alert(
+        'Producto registrado correctamente.'
+      )
     }
 
     limpiarFormulario()
+
+    await cargarProductos()
+
+  } catch (error) {
+
+    console.error(error)
+
+    alert(error.message)
   }
+}
 
   const editarProducto = (producto) => {
 
-    setFormulario({
-      nombreProducto: producto.nombreProducto,
-      descripcion: producto.descripcion,
-      precio: producto.precio,
-      stock: producto.stock
-    })
+  setFormulario({
+    nombreProducto:
+      producto.nombreProducto,
+    descripcion:
+      producto.descripcion,
+    precio:
+      producto.precio,
+    stock:
+      producto.stock
+  })
+  setEditandoId(
+    producto.idProducto
+  )
+}
 
-    setEditandoId(producto.idProducto)
+  const eliminarProducto = async (idProducto) => {
+
+  const confirmar = window.confirm(
+    '¿Está seguro de eliminar este producto?'
+  )
+
+  if (!confirmar) {
+    return
   }
 
-  const eliminarProducto = (idProducto) => {
+  try {
 
-    const confirmar = window.confirm(
-      '¿Está seguro de eliminar este producto?'
+    await eliminarProductoAPI(idProducto)
+
+    alert(
+      'Producto eliminado correctamente.'
     )
-
-    if (!confirmar) {
-      return
-    }
-
-    const nuevaLista = productos.filter(
-      (producto) => producto.idProducto !== idProducto
-    )
-
-    setProductos(nuevaLista)
 
     if (editandoId === idProducto) {
       limpiarFormulario()
     }
+
+    await cargarProductos()
+
+  } catch (error) {
+
+    console.error(error)
+
+    alert(error.message)
   }
+}
 
   const formatearPrecio = (precio) => {
 
@@ -148,9 +252,31 @@ function Productos() {
     ).format(precio)
   }
 
+
+  
   return (
 
     <div className="productos-page">
+
+    {/* =========================
+        ESTADO DE CARGA
+    ========================= */}
+
+    {cargando && (
+      <div className="mensaje-cargando">
+        Cargando productos...
+      </div>
+    )}
+
+    {/* =========================
+        MENSAJE DE ERROR
+    ========================= */}
+
+    {error && (
+      <div className="mensaje-error-productos">
+        ⚠️ {error}
+      </div>
+    )}
 
       {/* =========================
           ENCABEZADO
