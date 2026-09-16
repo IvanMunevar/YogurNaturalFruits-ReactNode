@@ -22,11 +22,13 @@ function Productos() {
   const [productos, setProductos] = useState([])
 
   const [formulario, setFormulario] = useState({
-    nombreProducto: '',
-    descripcion: '',
-    precio: '',
-    stock: ''
-  })
+  nombreProducto: '',
+  descripcion: '',
+  precio: '',
+  stock: '',
+  stockMinimo: '5',
+  fechaVencimiento: ''
+})
 
   const [editandoId, setEditandoId] = useState(null)
 
@@ -94,11 +96,13 @@ function Productos() {
   const limpiarFormulario = () => {
 
     setFormulario({
-      nombreProducto: '',
-      descripcion: '',
-      precio: '',
-      stock: ''
-    })
+       nombreProducto: '',
+        descripcion: '',
+        precio: '',
+        stock: '',
+        stockMinimo: '5',
+        fechaVencimiento: ''
+      })
 
     setEditandoId(null)
   }
@@ -108,10 +112,11 @@ function Productos() {
   evento.preventDefault()
 
   if (
-    formulario.nombreProducto.trim() === '' ||
-    formulario.precio === '' ||
-    formulario.stock === ''
-  ) {
+  formulario.nombreProducto.trim() === '' ||
+  formulario.precio === '' ||
+  formulario.stock === '' ||
+  formulario.stockMinimo === ''
+    ) {
 
     alert(
       'Debe completar los campos obligatorios.'
@@ -131,7 +136,7 @@ function Productos() {
   }
 
 
-  if (Number(formulario.stock) < 0) {
+  if (Number(formulario.stockMinimo) < 0) {
 
     alert(
       'El stock no puede ser negativo.'
@@ -143,18 +148,25 @@ function Productos() {
 
   const producto = {
 
-    nombreProducto:
-      formulario.nombreProducto,
+  nombreProducto:
+    formulario.nombreProducto,
 
-    descripcion:
-      formulario.descripcion,
+  descripcion:
+    formulario.descripcion,
 
-    precio:
-      Number(formulario.precio),
+  precio:
+    Number(formulario.precio),
 
-    stock:
-      Number(formulario.stock)
-  }
+  stock:
+    Number(formulario.stock),
+
+  stockMinimo:
+    Number(formulario.stockMinimo),
+
+  fechaVencimiento:
+    formulario.fechaVencimiento ||
+    null
+    }
 
 
   try {
@@ -191,22 +203,40 @@ function Productos() {
   }
 }
 
-  const editarProducto = (producto) => {
+ const editarProducto = (
+  producto
+) => {
 
   setFormulario({
+
     nombreProducto:
       producto.nombreProducto,
+
     descripcion:
-      producto.descripcion,
+      producto.descripcion || '',
+
     precio:
       producto.precio,
+
     stock:
-      producto.stock
+      producto.stock,
+
+    stockMinimo:
+      producto.stockMinimo,
+
+    fechaVencimiento:
+      producto.fechaVencimiento || ''
   })
+
   setEditandoId(
     producto.idProducto
   )
-}
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+    }
 
   const eliminarProducto = async (idProducto) => {
 
@@ -352,7 +382,45 @@ function Productos() {
               onChange={manejarCambio}
             />
 
-          </div>
+            </div>
+            <div className="campo-producto">
+
+            <label htmlFor="stockMinimo">
+            Stock mínimo *
+            </label>
+
+            <input
+            type="number"
+            id="stockMinimo"
+            name="stockMinimo"
+            placeholder="Ej. 5"
+            min="0"
+            value={
+            formulario.stockMinimo
+            }
+            onChange={manejarCambio}
+            />
+
+            </div>
+
+
+            <div className="campo-producto">
+
+            <label htmlFor="fechaVencimiento">
+            Fecha de vencimiento
+            </label>
+
+            <input
+            type="date"
+            id="fechaVencimiento"
+            name="fechaVencimiento"
+            value={
+            formulario.fechaVencimiento
+            }
+            onChange={manejarCambio}
+            />
+            </div>
+
 
           <div className="campo-producto">
 
@@ -364,7 +432,7 @@ function Productos() {
               type="number"
               id="stock"
               name="stock"
-              placeholder="Ej. 20"
+              placeholder="Ej. 10"
               min="0"
               value={formulario.stock}
               onChange={manejarCambio}
@@ -453,7 +521,9 @@ function Productos() {
                 <th>Descripción</th>
                 <th>Precio</th>
                 <th>Stock</th>
-                <th>Acciones</th>
+                <th>Stock mínimo</th>
+                <th>Vencimiento</th>
+                <th>Acciones</th> 
               </tr>
 
             </thead>
@@ -465,7 +535,7 @@ function Productos() {
                 <tr>
 
                   <td
-                    colSpan="6"
+                    colSpan="8"
                     className="sin-productos"
                   >
                     No hay productos registrados.
@@ -499,14 +569,26 @@ function Productos() {
 
                       <span
                         className={
-                          producto.stock <= 5
-                            ? 'stock stock-bajo'
-                            : 'stock stock-normal'
+                         Number(producto.stock) <=
+                          Number(producto.stockMinimo)
+                           ? 'stock stock-bajo'
+                           : 'stock stock-normal'
                         }
                       >
-                        {producto.stock}
-                      </span>
+                         {producto.stock}
+                    </span>
                     </td>
+
+                    <td>
+                      {producto.stockMinimo}
+                    </td>
+
+                    <td>
+                      {producto.fechaVencimiento ||
+                        'Sin fecha'
+                      }
+                    </td>
+
 
                     <td>
 

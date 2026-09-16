@@ -1,0 +1,316 @@
+.usuarios-page {
+    width: 100%;
+}
+
+
+/* =========================
+   CABECERA
+========================= */
+
+.usuarios-cabecera {
+    margin-bottom: 25px;
+}
+
+.usuarios-cabecera h1 {
+    color: #163d29;
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.usuarios-cabecera p {
+    color: #6b7280;
+}
+
+
+/* =========================
+   CONTENEDORES
+========================= */
+
+.usuarios-formulario-contenedor,
+.usuarios-listado {
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    padding: 25px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.05);
+}
+
+
+.usuarios-formulario-contenedor h2,
+.usuarios-listado h2 {
+
+    color: #163d29;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================
+   FORMULARIO
+========================= */
+
+.usuarios-formulario {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+
+.campo-usuario {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.campo-usuario label {
+
+    color: #374151;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.campo-usuario input {
+
+    padding: 11px 13px;
+
+    border:
+        1px solid #d1d5db;
+
+    border-radius: 7px;
+
+    outline: none;
+}
+
+
+.campo-usuario input:focus {
+
+    border-color: #2d7a4a;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(45,122,74,0.12);
+}
+
+
+.nota-contrasena {
+
+    grid-column: 1 / -1;
+
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+
+.usuarios-acciones-formulario {
+
+    grid-column: 1 / -1;
+
+    display: flex;
+
+    gap: 12px;
+}
+
+
+.btn-guardar-usuario {
+
+    border: none;
+
+    background: #1f6b43;
+
+    color: white;
+
+    padding: 11px 18px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+
+.btn-cancelar-usuario {
+
+    border:
+        1px solid #d1d5db;
+
+    background: white;
+
+    padding: 11px 18px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   TABLA
+========================= */
+
+.tabla-contenedor {
+
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+
+.tabla-usuarios {
+
+    width: 100%;
+
+    min-width: 750px;
+
+    border-collapse: collapse;
+
+    margin-top: 20px;
+}
+
+
+.tabla-usuarios thead {
+
+    background: #f0f7f3;
+}
+
+
+.tabla-usuarios th,
+.tabla-usuarios td {
+
+    padding: 13px;
+
+    border-bottom:
+        1px solid #eeeeee;
+
+    text-align: left;
+}
+
+
+.tabla-usuarios th {
+
+    color: #163d29;
+}
+
+
+.usuarios-acciones-tabla {
+
+    display: flex;
+
+    gap: 8px;
+}
+
+
+.btn-editar-usuario {
+
+    border: none;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    padding: 7px 10px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+
+.btn-eliminar-usuario {
+
+    border: none;
+
+    background: #fef2f2;
+
+    color: #dc2626;
+
+    padding: 7px 10px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+
+.sin-usuarios {
+
+    text-align: center !important;
+
+    color: #9ca3af;
+
+    padding: 30px !important;
+}
+
+
+/* =========================
+   MENSAJES
+========================= */
+
+.usuarios-cargando {
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+}
+
+
+.usuarios-error {
+
+    background: #fef2f2;
+
+    color: #dc2626;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .usuarios-formulario {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .usuarios-formulario {
+
+        grid-template-columns:
+            1fr;
+    }
+}

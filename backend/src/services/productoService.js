@@ -1,5 +1,10 @@
 import pool from '../config/database.js'
 
+
+// =========================
+// LISTAR PRODUCTOS
+// =========================
+
 const listarProductos = async () => {
 
   const [filas] = await pool.query(`
@@ -8,15 +13,30 @@ const listarProductos = async () => {
       nombre_producto AS nombreProducto,
       descripcion,
       precio,
-      stock
+      stock,
+      stock_minimo AS stockMinimo,
+
+      DATE_FORMAT(
+        fecha_vencimiento,
+        '%Y-%m-%d'
+      ) AS fechaVencimiento
+
     FROM productos
+
     ORDER BY id_producto DESC
   `)
 
   return filas
 }
 
-const buscarProductoPorId = async (idProducto) => {
+
+// =========================
+// BUSCAR PRODUCTO POR ID
+// =========================
+
+const buscarProductoPorId = async (
+  idProducto
+) => {
 
   const [filas] = await pool.query(
     `
@@ -25,8 +45,16 @@ const buscarProductoPorId = async (idProducto) => {
         nombre_producto AS nombreProducto,
         descripcion,
         precio,
-        stock
+        stock,
+        stock_minimo AS stockMinimo,
+
+        DATE_FORMAT(
+          fecha_vencimiento,
+          '%Y-%m-%d'
+        ) AS fechaVencimiento
+
       FROM productos
+
       WHERE id_producto = ?
     `,
     [idProducto]
@@ -35,43 +63,68 @@ const buscarProductoPorId = async (idProducto) => {
   return filas[0]
 }
 
-const crearProducto = async (producto) => {
+
+// =========================
+// CREAR PRODUCTO
+// =========================
+
+const crearProducto = async (
+  producto
+) => {
 
   const {
     nombreProducto,
     descripcion,
     precio,
-    stock
+    stock,
+    stockMinimo,
+    fechaVencimiento
   } = producto
 
-  const [resultado] = await pool.execute(
-    `
-      INSERT INTO productos
-      (
-        nombre_producto,
-        descripcion,
+
+  const [resultado] =
+    await pool.execute(
+      `
+        INSERT INTO productos
+        (
+          nombre_producto,
+          descripcion,
+          precio,
+          stock,
+          stock_minimo,
+          fecha_vencimiento
+        )
+        VALUES (?, ?, ?, ?, ?, ?)
+      `,
+      [
+        nombreProducto,
+        descripcion || null,
         precio,
-        stock
-      )
-      VALUES (?, ?, ?, ?)
-    `,
-    [
-      nombreProducto,
-      descripcion,
-      precio,
-      stock
-    ]
-  )
+        stock,
+        stockMinimo,
+        fechaVencimiento || null
+      ]
+    )
+
 
   return {
-    idProducto: resultado.insertId,
+
+    idProducto:
+      resultado.insertId,
+
     nombreProducto,
     descripcion,
     precio,
-    stock
+    stock,
+    stockMinimo,
+    fechaVencimiento
   }
 }
 
+
+// =========================
+// ACTUALIZAR PRODUCTO
+// =========================
 
 const actualizarProducto = async (
   idProducto,
@@ -82,41 +135,60 @@ const actualizarProducto = async (
     nombreProducto,
     descripcion,
     precio,
-    stock
+    stock,
+    stockMinimo,
+    fechaVencimiento
   } = producto
 
-  const [resultado] = await pool.execute(
-    `
-      UPDATE productos
-      SET
-        nombre_producto = ?,
-        descripcion = ?,
-        precio = ?,
-        stock = ?
-      WHERE id_producto = ?
-    `,
-    [
-      nombreProducto,
-      descripcion,
-      precio,
-      stock,
-      idProducto
-    ]
-  )
+
+  const [resultado] =
+    await pool.execute(
+      `
+        UPDATE productos
+
+        SET
+          nombre_producto = ?,
+          descripcion = ?,
+          precio = ?,
+          stock = ?,
+          stock_minimo = ?,
+          fecha_vencimiento = ?
+
+        WHERE id_producto = ?
+      `,
+      [
+        nombreProducto,
+        descripcion || null,
+        precio,
+        stock,
+        stockMinimo,
+        fechaVencimiento || null,
+        idProducto
+      ]
+    )
+
 
   return resultado.affectedRows
 }
 
 
-const eliminarProducto = async (idProducto) => {
+// =========================
+// ELIMINAR PRODUCTO
+// =========================
 
-  const [resultado] = await pool.execute(
-    `
-      DELETE FROM productos
-      WHERE id_producto = ?
-    `,
-    [idProducto]
-  )
+const eliminarProducto = async (
+  idProducto
+) => {
+
+  const [resultado] =
+    await pool.execute(
+      `
+        DELETE FROM productos
+        WHERE id_producto = ?
+      `,
+      [idProducto]
+    )
+
 
   return resultado.affectedRows
 }

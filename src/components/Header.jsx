@@ -5,8 +5,17 @@ function Header() {
   const navigate = useNavigate()
 
   const cerrarSesion = () => {
+  sessionStorage.removeItem('usuario')
     navigate('/')
-  }
+    }
+
+  const usuarioGuardado =
+  sessionStorage.getItem('usuario')
+
+  const usuario =
+  usuarioGuardado
+    ? JSON.parse(usuarioGuardado)
+    : null
 
   return (
     <header className="header">
@@ -19,8 +28,8 @@ function Header() {
       <div className="header-usuario">
 
         <div className="usuario-info">
-          <strong>Administrador</strong>
-          <span>Usuario del sistema</span>
+          <strong> {usuario?.nombreUsuario ||'Usuario'}</strong>
+          <span>  {usuario?.correo ||'Usuario del sistema'}</span>
         </div>
 
         <button

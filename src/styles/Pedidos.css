@@ -1,0 +1,530 @@
+.pedidos-page {
+    width: 100%;
+}
+
+
+/* =========================
+   CABECERA
+========================= */
+
+.pedidos-cabecera {
+    margin-bottom: 25px;
+}
+
+.pedidos-cabecera h1 {
+    color: #163d29;
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.pedidos-cabecera p {
+    color: #6b7280;
+}
+
+
+/* =========================
+   CONTENEDORES
+========================= */
+
+.pedido-contenedor,
+.pedidos-historial,
+.detalle-pedido-card {
+
+    background: white;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    padding: 25px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0,0,0,0.05);
+}
+
+
+.pedido-titulo {
+    margin-bottom: 22px;
+}
+
+
+.pedido-titulo h2 {
+    color: #163d29;
+    margin-bottom: 5px;
+}
+
+
+.pedido-titulo p {
+    color: #6b7280;
+}
+
+
+/* =========================
+   DATOS DEL PEDIDO
+========================= */
+
+.pedido-datos {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+}
+
+
+.campo-pedido {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.campo-pedido label {
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #374151;
+}
+
+
+.campo-pedido input,
+.campo-pedido select {
+
+    padding: 11px 13px;
+
+    border:
+        1px solid #d1d5db;
+
+    border-radius: 7px;
+
+    outline: none;
+}
+
+
+.campo-pedido input:focus,
+.campo-pedido select:focus {
+
+    border-color: #2d7a4a;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(45,122,74,0.12);
+}
+
+
+/* =========================
+   AGREGAR PRODUCTO
+========================= */
+
+.agregar-producto {
+
+    display: grid;
+
+    grid-template-columns:
+        2fr 1fr auto;
+
+    gap: 15px;
+
+    align-items: end;
+
+    background: #f8faf9;
+
+    padding: 20px;
+
+    border-radius: 10px;
+
+    margin-bottom: 25px;
+}
+
+
+.btn-agregar-producto {
+
+    border: none;
+
+    background: #1f6b43;
+
+    color: white;
+
+    padding: 11px 16px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+
+.contenedor-agregar {
+
+    display: flex;
+
+    align-items: end;
+}
+
+
+/* =========================
+   PRODUCTOS DEL PEDIDO
+========================= */
+
+.productos-pedido {
+
+    border-top:
+        1px solid #e5e7eb;
+
+    padding-top: 20px;
+
+    margin-bottom: 25px;
+}
+
+
+.productos-pedido h3 {
+
+    color: #163d29;
+
+    margin-bottom: 15px;
+}
+
+
+.tabla-contenedor {
+
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+
+.tabla-detalle-pedido,
+.tabla-pedidos {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 800px;
+}
+
+
+.tabla-detalle-pedido thead,
+.tabla-pedidos thead {
+
+    background: #f0f7f3;
+}
+
+
+.tabla-detalle-pedido th,
+.tabla-detalle-pedido td,
+.tabla-pedidos th,
+.tabla-pedidos td {
+
+    padding: 12px;
+
+    text-align: left;
+
+    border-bottom:
+        1px solid #eeeeee;
+}
+
+
+.tabla-detalle-pedido th,
+.tabla-pedidos th {
+
+    color: #163d29;
+}
+
+
+.cantidad-detalle {
+
+    width: 75px;
+
+    padding: 7px;
+
+    border:
+        1px solid #d1d5db;
+
+    border-radius: 6px;
+}
+
+
+.btn-quitar-producto {
+
+    border: none;
+
+    background: #fef2f2;
+
+    color: #dc2626;
+
+    padding: 7px 10px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   TOTAL
+========================= */
+
+.pedido-total {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 25px;
+
+    margin-top: 20px;
+
+    padding: 15px 0;
+
+    font-size: 18px;
+}
+
+
+.pedido-total strong {
+
+    color: #163d29;
+
+    font-size: 24px;
+}
+
+
+.btn-guardar-pedido {
+
+    border: none;
+
+    background: #1f6b43;
+
+    color: white;
+
+    padding: 12px 20px;
+
+    border-radius: 7px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.btn-guardar-pedido:hover,
+.btn-agregar-producto:hover {
+
+    background: #175735;
+}
+
+
+/* =========================
+   ESTADOS
+========================= */
+
+.estado-pedido {
+
+    border: none;
+
+    padding: 7px 10px;
+
+    border-radius: 20px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.estado-pedido.pendiente {
+
+    background: #fef3c7;
+
+    color: #92400e;
+}
+
+
+.estado-pedido.confirmado {
+
+    background: #dbeafe;
+
+    color: #1d4ed8;
+}
+
+
+.estado-pedido.entregado {
+
+    background: #dcfce7;
+
+    color: #15803d;
+}
+
+
+.estado-pedido.cancelado {
+
+    background: #fee2e2;
+
+    color: #dc2626;
+}
+
+
+/* =========================
+   DETALLE
+========================= */
+
+.btn-ver-pedido {
+
+    border: none;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    padding: 7px 10px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+
+.detalle-cabecera {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: start;
+
+    margin-bottom: 20px;
+}
+
+
+.detalle-cabecera h2 {
+
+    color: #163d29;
+}
+
+
+.btn-cerrar-detalle {
+
+    border: none;
+
+    background: #f3f4f6;
+
+    width: 35px;
+
+    height: 35px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+}
+
+
+.detalle-info {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 25px;
+
+    background: #f8faf9;
+
+    padding: 15px;
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+
+    color: #4b5563;
+}
+
+
+.sin-productos-pedido,
+.sin-pedidos {
+
+    text-align: center !important;
+
+    color: #9ca3af;
+
+    padding: 30px !important;
+}
+
+
+/* =========================
+   MENSAJES
+========================= */
+
+.pedidos-cargando {
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+}
+
+
+.pedidos-error {
+
+    background: #fef2f2;
+
+    color: #dc2626;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .agregar-producto {
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+
+    .contenedor-agregar {
+
+        grid-column: 1 / -1;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .pedido-datos {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .agregar-producto {
+
+        grid-template-columns: 1fr;
+    }
+}

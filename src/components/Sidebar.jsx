@@ -51,25 +51,58 @@ function Sidebar() {
             isActive ? 'menu-item activo' : 'menu-item'
           }
         >
-          <span>🧺</span>Insumos</NavLink>
+            <span>🧺</span>Insumos</NavLink>
 
         <NavLink
-          to="/ventas"
+          to="/proveedores"
           className={({ isActive }) =>
+          isActive ? 'menu-item activo' : 'menu-item'
+          }
+        >
+            <span>🚚</span>Proveedores</NavLink>
+
+         <NavLink
+           to="/clientes"
+           className={({ isActive }) =>
             isActive ? 'menu-item activo' : 'menu-item'
           }
         >
-          <span>💰</span>Ventas</NavLink>
+              <span>👤</span> Clientes</NavLink>
 
-        <NavLink
-          to="/usuarios"
-          className={({ isActive }) =>
+          <NavLink
+            to="/pedidos"
+            className={({ isActive }) =>
+              isActive ? 'menu-item activo' : 'menu-item'
+          }
+          >
+              <span>📦</span> Pedidos </NavLink>
+
+          <NavLink
+            to="/ventas"
+            className={({ isActive }) =>
+            isActive ? 'menu-item activo' : 'menu-item'
+          }
+           >
+               <span>💰</span>Ventas</NavLink>
+
+          <NavLink
+            to="/alertas"
+            className={({ isActive }) =>
+            isActive ? 'menu-item activo' : 'menu-item'
+          }
+          >
+               <span>⚠️</span> Alertas</NavLink>
+
+
+          <NavLink
+            to="/usuarios"
+            className={({ isActive }) =>
             isActive ? 'menu-item activo' : 'menu-item'
           }
         >
-          <span>👥</span>Usuarios</NavLink>
+              <span>👥</span>Usuarios</NavLink>
 
-        <NavLink
+          <NavLink
           to="/reportes"
           className={({ isActive }) =>
             isActive ? 'menu-item activo' : 'menu-item'

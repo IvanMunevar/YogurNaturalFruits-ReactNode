@@ -1,0 +1,182 @@
+.insumos-page {
+    width: 100%;
+}
+
+.insumos-cabecera {
+    margin-bottom: 25px;
+}
+
+.insumos-cabecera h1 {
+    color: #163d29;
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.insumos-cabecera p {
+    color: #6b7280;
+}
+
+.insumos-formulario-contenedor,
+.insumos-listado {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.05);
+}
+
+.insumos-formulario {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.campo-insumo {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.campo-insumo label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.campo-insumo input,
+.campo-insumo select {
+    padding: 11px 13px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 7px;
+
+    outline: none;
+}
+
+.campo-insumo input:focus,
+.campo-insumo select:focus {
+    border-color: #2d7a4a;
+
+    box-shadow:
+        0 0 0 3px rgba(45,122,74,0.12);
+}
+
+.btn-guardar-insumo {
+    border: none;
+    background: #1f6b43;
+    color: white;
+
+    padding: 11px 18px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+.btn-cancelar-insumo {
+    border: 1px solid #d1d5db;
+    background: white;
+
+    padding: 11px 18px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+.tabla-insumos {
+    width: 100%;
+
+    min-width: 900px;
+
+    border-collapse: collapse;
+
+    margin-top: 20px;
+}
+
+.tabla-insumos thead {
+    background: #f0f7f3;
+}
+
+.tabla-insumos th,
+.tabla-insumos td {
+    padding: 13px;
+
+    border-bottom:
+        1px solid #eeeeee;
+
+    text-align: left;
+}
+
+.tabla-insumos th {
+    color: #163d29;
+}
+
+.sin-insumos {
+    text-align: center !important;
+    color: #9ca3af;
+
+    padding: 30px !important;
+}
+
+.mensaje-error-insumos {
+    background: #fef2f2;
+    color: #dc2626;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+}
+
+@media (max-width: 900px) {
+
+    .insumos-formulario {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+
+    .insumos-formulario {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cantidad-insumo {
+
+    display: inline-block;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    font-weight: 600;
+
+    font-size: 13px;
+}
+
+
+.cantidad-baja {
+
+    background: #fee2e2;
+
+    color: #dc2626;
+}
+
+
+.cantidad-normal {
+
+    background: #dcfce7;
+
+    color: #15803d;
+}

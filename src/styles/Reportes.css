@@ -1,0 +1,567 @@
+.reportes-page {
+    width: 100%;
+}
+
+
+/* CABECERA */
+
+.reportes-cabecera {
+    margin-bottom: 25px;
+}
+
+.reportes-cabecera h1 {
+    color: #163d29;
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.reportes-cabecera p {
+    color: #6b7280;
+}
+
+
+/* FORMULARIO */
+
+.reporte-formulario-contenedor {
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+
+    padding: 25px;
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0, 0, 0, 0.05);
+}
+
+
+.reporte-formulario-contenedor h2 {
+
+    color: #163d29;
+
+    margin-bottom: 20px;
+}
+
+
+.reporte-formulario {
+
+    display: grid;
+
+    grid-template-columns:
+        1.4fr 1fr 1fr auto;
+
+    gap: 18px;
+
+    align-items: end;
+}
+
+
+.campo-reporte {
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.campo-reporte label {
+
+    color: #374151;
+    font-weight: 600;
+
+    font-size: 14px;
+}
+
+
+.campo-reporte select,
+.campo-reporte input {
+
+    padding: 10px 12px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+
+    outline: none;
+}
+
+
+.campo-reporte select:focus,
+.campo-reporte input:focus {
+
+    border-color: #2d7a4a;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(45, 122, 74, 0.12);
+}
+
+
+.campo-reporte input:disabled {
+
+    background: #f3f4f6;
+
+    color: #9ca3af;
+}
+
+
+.btn-generar-reporte {
+
+    border: none;
+
+    background: #1f6b43;
+
+    color: white;
+
+    padding: 11px 18px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+.btn-generar-reporte:hover {
+    background: #175735;
+}
+
+
+.btn-generar-reporte:disabled {
+
+    background: #9ca3af;
+
+    cursor: not-allowed;
+}
+
+
+.mensaje-inventario {
+
+    margin-top: 15px;
+
+    padding: 10px 12px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+}
+
+
+/* REPORTE */
+
+.reporte-generado {
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    padding: 30px;
+
+    margin-bottom: 30px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0, 0, 0, 0.05);
+}
+
+
+.reporte-encabezado {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    padding-bottom: 20px;
+
+    border-bottom:
+        2px solid #e5e7eb;
+
+    margin-bottom: 20px;
+}
+
+
+.reporte-encabezado h2 {
+
+    color: #163d29;
+
+    margin-bottom: 5px;
+}
+
+
+.reporte-encabezado h3 {
+
+    color: #374151;
+
+    margin-bottom: 5px;
+}
+
+
+.reporte-encabezado p {
+    color: #6b7280;
+}
+
+
+.btn-imprimir {
+
+    border: none;
+
+    background: #1f6b43;
+
+    color: white;
+
+    padding: 10px 16px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+
+.datos-generacion {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 30px;
+
+    margin-bottom: 25px;
+
+    color: #4b5563;
+}
+
+
+/* RESUMEN */
+
+.reporte-resumen {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+
+.reporte-resumen-cinco {
+
+    grid-template-columns:
+        repeat(5, 1fr);
+}
+
+
+.reporte-resumen-alertas {
+
+    grid-template-columns:
+        repeat(4, 1fr);
+}
+
+
+.reporte-resumen div {
+
+    background: #f8faf9;
+
+    padding: 17px;
+
+    border-radius: 9px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+
+.reporte-resumen span {
+
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+
+.reporte-resumen strong {
+
+    color: #163d29;
+
+    font-size: 22px;
+}
+
+
+/* TABLAS */
+
+.tabla-contenedor {
+
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+
+.tabla-reporte,
+.tabla-reportes {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 850px;
+}
+
+
+.tabla-reporte thead,
+.tabla-reportes thead {
+
+    background: #f0f7f3;
+}
+
+
+.tabla-reporte th,
+.tabla-reporte td,
+.tabla-reportes th,
+.tabla-reportes td {
+
+    padding: 11px 12px;
+
+    text-align: left;
+
+    border-bottom:
+        1px solid #e5e7eb;
+}
+
+
+.tabla-reporte th,
+.tabla-reportes th {
+
+    color: #163d29;
+
+    font-size: 13px;
+}
+
+
+.tabla-reporte td,
+.tabla-reportes td {
+
+    color: #4b5563;
+
+    font-size: 14px;
+}
+
+
+.subtitulo-reporte {
+
+    color: #163d29;
+
+    margin-top: 30px;
+
+    margin-bottom: 12px;
+}
+
+
+/* HISTORIAL */
+
+.historial-reportes {
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0, 0, 0, 0.05);
+}
+
+
+.historial-titulo {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+
+.historial-titulo h2 {
+    color: #163d29;
+}
+
+
+.historial-titulo span {
+
+    background: #eaf6ef;
+
+    color: #1f6b43;
+
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+.sin-reportes {
+
+    text-align: center !important;
+
+    padding: 30px !important;
+
+    color: #9ca3af !important;
+}
+
+
+/* ERROR */
+
+.reportes-error {
+
+    background: #fef2f2;
+
+    color: #dc2626;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    margin-top: 15px;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+
+    .reporte-formulario {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .reporte-resumen,
+    .reporte-resumen-cinco,
+    .reporte-resumen-alertas {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .reporte-formulario,
+    .reporte-resumen,
+    .reporte-resumen-cinco,
+    .reporte-resumen-alertas {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .reporte-encabezado {
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+
+    .datos-generacion {
+
+        flex-direction: column;
+
+        gap: 8px;
+    }
+}
+
+
+/* =========================
+   IMPRESIÓN
+========================= */
+
+@media print {
+
+    body * {
+        visibility: hidden;
+    }
+
+
+    #reporte-imprimible,
+    #reporte-imprimible * {
+
+        visibility: visible;
+    }
+
+
+    #reporte-imprimible {
+
+        position: absolute;
+
+        left: 0;
+        top: 0;
+
+        width: 100%;
+
+        box-shadow: none;
+
+        border: none;
+
+        padding: 15px;
+    }
+
+
+    .no-imprimir {
+
+        display: none !important;
+    }
+
+
+    .tabla-contenedor {
+
+        overflow: visible;
+    }
+
+
+    .tabla-reporte {
+
+        min-width: 0;
+
+        width: 100%;
+    }
+
+
+    .tabla-reporte th,
+    .tabla-reporte td {
+
+        font-size: 10px;
+
+        padding: 6px;
+    }
+}

@@ -1,0 +1,246 @@
+.proveedores-page {
+    width: 100%;
+}
+
+.proveedores-cabecera {
+    margin-bottom: 25px;
+}
+
+.proveedores-cabecera h1 {
+    color: #163d29;
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.proveedores-cabecera p {
+    color: #6b7280;
+}
+
+.proveedores-formulario-contenedor,
+.proveedores-listado {
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    padding: 25px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.05);
+}
+
+.proveedores-formulario-contenedor h2,
+.proveedores-listado h2 {
+    color: #163d29;
+    margin-bottom: 18px;
+}
+
+.proveedores-formulario {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.campo-proveedor {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.campo-proveedor label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.campo-proveedor input,
+.campo-proveedor select {
+    padding: 11px 13px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 7px;
+
+    outline: none;
+}
+
+.campo-proveedor input:focus,
+.campo-proveedor select:focus {
+    border-color: #2d7a4a;
+
+    box-shadow:
+        0 0 0 3px rgba(45,122,74,0.12);
+}
+
+.acciones-formulario {
+    grid-column: 1 / -1;
+
+    display: flex;
+
+    gap: 12px;
+}
+
+.btn-guardar-proveedor {
+    border: none;
+
+    background: #1f6b43;
+
+    color: white;
+
+    padding: 11px 18px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+.btn-cancelar-proveedor {
+    border: 1px solid #d1d5db;
+
+    background: white;
+
+    padding: 11px 18px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+.tabla-contenedor {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tabla-proveedores {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    margin-top: 20px;
+
+    min-width: 900px;
+}
+
+.tabla-proveedores thead {
+    background: #f0f7f3;
+}
+
+.tabla-proveedores th,
+.tabla-proveedores td {
+    padding: 13px;
+
+    border-bottom:
+        1px solid #eeeeee;
+
+    text-align: left;
+}
+
+.tabla-proveedores th {
+    color: #163d29;
+}
+
+.acciones-tabla {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-editar {
+    border: none;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    padding: 7px 10px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+.btn-eliminar {
+    border: none;
+
+    background: #fef2f2;
+
+    color: #dc2626;
+
+    padding: 7px 10px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+.estado {
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+.estado.activo {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.estado.inactivo {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.sin-proveedores {
+    text-align: center !important;
+
+    color: #9ca3af;
+
+    padding: 30px !important;
+}
+
+.mensaje-cargando {
+    background: #eff6ff;
+    color: #2563eb;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+}
+
+.mensaje-error-proveedores {
+    background: #fef2f2;
+    color: #dc2626;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+}
+
+@media (max-width: 900px) {
+
+    .proveedores-formulario {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+
+    .proveedores-formulario {
+        grid-template-columns: 1fr;
+    }
+}
