@@ -9,11 +9,15 @@ const listarUsuarios = async () => {
 
   const [filas] = await pool.query(`
     SELECT
-      id_usuario AS idUsuario,
-      nombre_usuario AS nombreUsuario,
-      correo
-    FROM usuario
-    ORDER BY id_usuario DESC
+      u.id_usuario AS idUsuario,
+      u.nombre_usuario AS nombreUsuario,
+      u.correo,
+      u.id_rol AS idRol,
+      r.nombre_rol AS rol
+    FROM usuario AS u
+    INNER JOIN roles AS r
+      ON u.id_rol = r.id_rol
+    ORDER BY u.id_usuario DESC
   `)
 
   return filas
@@ -29,11 +33,15 @@ const buscarUsuarioPorId = async (idUsuario) => {
   const [filas] = await pool.query(
     `
       SELECT
-        id_usuario AS idUsuario,
-        nombre_usuario AS nombreUsuario,
-        correo
-      FROM usuario
-      WHERE id_usuario = ?
+        u.id_usuario AS idUsuario,
+        u.nombre_usuario AS nombreUsuario,
+        u.correo,
+        u.id_rol AS idRol,
+        r.nombre_rol AS rol
+      FROM usuario AS u
+      INNER JOIN roles AS r
+        ON u.id_rol = r.id_rol
+      WHERE u.id_usuario = ?
     `,
     [idUsuario]
   )
@@ -51,12 +59,17 @@ const buscarUsuarioPorCorreo = async (correo) => {
   const [filas] = await pool.query(
     `
       SELECT
-        id_usuario AS idUsuario,
-        nombre_usuario AS nombreUsuario,
-        correo,
-        contraseña
-      FROM usuario
-      WHERE correo = ?
+        u.id_usuario AS idUsuario,
+        u.nombre_usuario AS nombreUsuario,
+        u.correo,
+        u.contraseña,
+        u.id_rol AS idRol,
+        r.nombre_rol AS rol
+      FROM usuario AS u
+      INNER JOIN roles AS r
+        ON u.id_rol = r.id_rol
+      WHERE u.correo = ?
+      LIMIT 1
     `,
     [correo]
   )
@@ -74,9 +87,9 @@ const crearUsuario = async (usuario) => {
   const {
     nombreUsuario,
     correo,
-    contrasena
+    contrasena,
+    idRol
   } = usuario
-
 
   const [resultado] = await pool.execute(
     `
@@ -84,22 +97,24 @@ const crearUsuario = async (usuario) => {
       (
         nombre_usuario,
         correo,
-        contraseña
+        contraseña,
+        id_rol
       )
-      VALUES (?, ?, ?)
+      VALUES (?, ?, ?, ?)
     `,
     [
       nombreUsuario,
       correo,
-      contrasena
+      contrasena,
+      idRol
     ]
   )
-
 
   return {
     idUsuario: resultado.insertId,
     nombreUsuario,
-    correo
+    correo,
+    idRol
   }
 }
 
@@ -115,25 +130,26 @@ const actualizarUsuario = async (
 
   const {
     nombreUsuario,
-    correo
+    correo,
+    idRol
   } = usuario
-
 
   const [resultado] = await pool.execute(
     `
       UPDATE usuario
       SET
         nombre_usuario = ?,
-        correo = ?
+        correo = ?,
+        id_rol = ?
       WHERE id_usuario = ?
     `,
     [
       nombreUsuario,
       correo,
+      idRol,
       idUsuario
     ]
   )
-
 
   return resultado.affectedRows
 }
@@ -151,9 +167,9 @@ const actualizarUsuarioConContrasena = async (
   const {
     nombreUsuario,
     correo,
-    contrasena
+    contrasena,
+    idRol
   } = usuario
-
 
   const [resultado] = await pool.execute(
     `
@@ -161,17 +177,18 @@ const actualizarUsuarioConContrasena = async (
       SET
         nombre_usuario = ?,
         correo = ?,
-        contraseña = ?
+        contraseña = ?,
+        id_rol = ?
       WHERE id_usuario = ?
     `,
     [
       nombreUsuario,
       correo,
       contrasena,
+      idRol,
       idUsuario
     ]
   )
-
 
   return resultado.affectedRows
 }

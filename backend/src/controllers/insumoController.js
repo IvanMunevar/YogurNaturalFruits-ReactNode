@@ -173,24 +173,34 @@ const editarInsumo = async (req, res) => {
     const {
       nombreInsumo,
       cantidad,
+      cantidadMinima,
       unidadMedida,
       idProveedor
     } = req.body
 
 
     if (
-      !nombreInsumo ||
-      cantidad === undefined ||
-      !unidadMedida ||
-      !idProveedor
-    ) {
+  !nombreInsumo ||
+  cantidad === undefined ||
+  cantidadMinima === undefined ||
+  !unidadMedida ||
+  !idProveedor
+) {
+  return res.status(400).json({
+    mensaje:
+      'Nombre, cantidad, cantidad mínima, unidad de medida y proveedor son obligatorios.'
+  })
+}
 
-      return res.status(400).json({
-        mensaje:
-          'Debe completar los campos obligatorios.'
-      })
-    }
-
+if (
+  Number(cantidad) < 0 ||
+  Number(cantidadMinima) < 0
+) {
+  return res.status(400).json({
+    mensaje:
+      'Las cantidades no pueden ser negativas.'
+  })
+}
 
     const filas =
       await actualizarInsumo(

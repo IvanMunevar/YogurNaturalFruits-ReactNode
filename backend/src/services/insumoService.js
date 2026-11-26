@@ -99,7 +99,7 @@ const crearInsumo = async (insumo) => {
         fecha_vencimiento,
         id_proveedor
       )
-      VALUES (?, ?, ?, ?, ?)
+      VALUES (?, ?, ?, ?, ?, ?)
     `,
     [
       nombreInsumo,
@@ -160,8 +160,8 @@ const actualizarInsumo = async (
     [
       nombreInsumo,
       cantidad,
-      unidadMedida,
       cantidadMinima,
+      unidadMedida,
       fechaVencimiento || null,
       idProveedor,
       idInsumo

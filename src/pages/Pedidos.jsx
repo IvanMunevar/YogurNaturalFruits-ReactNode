@@ -741,23 +741,11 @@ function Pedidos() {
                 Estado
               </label>
 
-              <select
-                name="estadoPedido"
-                value={
-                  formulario.estadoPedido
-                }
-                onChange={manejarCambio}
-              >
-
-                <option value="Pendiente">
-                  Pendiente
-                </option>
-
-                <option value="Confirmado">
-                  Confirmado
-                </option>
-
-              </select>
+              <input
+                type="text"
+                value="Pendiente"
+                disabled
+              />
 
             </div>
 
@@ -1149,36 +1137,54 @@ function Pedidos() {
 
                       <td>
 
+                        {
+                        pedido.estadoPedido === 'Entregado' ||
+                        pedido.estadoPedido === 'Cancelado'
+                        ? (
+
+                        <span
+                        className={
+                        `estado-pedido ${pedido.estadoPedido.toLowerCase()}`
+                        }
+                        >
+                        {pedido.estadoPedido}
+                        </span>
+
+                        )
+                        : (
+
                         <select
-                          className={
-                            `estado-pedido ${pedido.estadoPedido.toLowerCase()}`
-                          }
-                          value={
-                            pedido.estadoPedido
-                          }
-                          onChange={
-                            (evento) =>
-                              cambiarEstado(
-                                pedido.idPedido,
-                                evento.target.value
-                              )
-                          }
+                        className={
+                        `estado-pedido ${pedido.estadoPedido.toLowerCase()}`
+                        }
+                        value={
+                        pedido.estadoPedido
+                        }
+                        onChange={
+                        (evento) =>
+                        cambiarEstado(
+                        pedido.idPedido,
+                        evento.target.value
+                        )
+                        }
                         >
 
-                          <option value="Pendiente">
-                            Pendiente
-                          </option>
+                        <option value="Pendiente">
+                        Pendiente
+                        </option>
 
-                          <option value="Confirmado">
-                            Confirmado
-                          </option>
+                        <option value="Confirmado">
+                        Confirmado
+                        </option>
 
-                      
-                          <option value="Cancelado">
-                            Cancelado
-                          </option>
+                        <option value="Cancelado">
+                        Cancelado
+                        </option>
 
                         </select>
+
+                        )
+                        }
 
                       </td>
 

@@ -334,35 +334,19 @@
 
 .estado-pedido {
 
-    border: none;
+    display: inline-block;
 
-    padding: 7px 10px;
+    padding: 6px 10px;
 
     border-radius: 20px;
 
+    font-size: 13px;
+
     font-weight: 600;
-
-    cursor: pointer;
 }
 
 
-.estado-pedido.pendiente {
-
-    background: #fef3c7;
-
-    color: #92400e;
-}
-
-
-.estado-pedido.confirmado {
-
-    background: #dbeafe;
-
-    color: #1d4ed8;
-}
-
-
-.estado-pedido.entregado {
+.estado-entregado {
 
     background: #dcfce7;
 
@@ -370,7 +354,7 @@
 }
 
 
-.estado-pedido.cancelado {
+.estado-cancelado {
 
     background: #fee2e2;
 
@@ -527,4 +511,32 @@
 
         grid-template-columns: 1fr;
     }
+}
+.estado-pedido {
+
+    display: inline-block;
+
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+.estado-entregado {
+
+    background: #dcfce7;
+
+    color: #15803d;
+}
+
+
+.estado-cancelado {
+
+    background: #fee2e2;
+
+    color: #dc2626;
 }

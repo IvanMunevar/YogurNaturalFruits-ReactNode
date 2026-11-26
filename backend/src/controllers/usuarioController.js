@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
 
 import {
   listarUsuarios,
@@ -82,10 +83,19 @@ const registrarUsuario = async (req, res) => {
   try {
 
     const {
-      nombreUsuario,
-      correo,
-      contrasena
-    } = req.body
+  nombreUsuario,
+  correo,
+  contrasena,
+  idRol = 2
+} = req.body ?? {}
+
+const idRolNumerico = Number(idRol)
+
+if (![1, 2].includes(idRolNumerico)) {
+  return res.status(400).json({
+    mensaje: 'El rol seleccionado no es válido.'
+  })
+}
 
 
     if (
@@ -122,14 +132,12 @@ const registrarUsuario = async (req, res) => {
 
 
     const nuevoUsuario =
-      await crearUsuario({
-
-        nombreUsuario,
-        correo,
-
-        contrasena:
-          contrasenaHash
-      })
+  await crearUsuario({
+    nombreUsuario,
+    correo,
+    contrasena: contrasenaHash,
+    idRol: idRolNumerico
+ })
 
 
     res.status(201).json({
@@ -166,27 +174,34 @@ const editarUsuario = async (req, res) => {
     const {
       nombreUsuario,
       correo,
-      contrasena
-    } = req.body
-
+      contrasena,
+      idRol
+    } = req.body ?? {}
 
     if (
       !nombreUsuario ||
-      !correo
+      !correo ||
+      idRol === undefined
     ) {
-
       return res.status(400).json({
         mensaje:
-          'Nombre y correo son obligatorios.'
+          'Nombre, correo y rol son obligatorios.'
       })
     }
 
+    const idRolNumerico = Number(idRol)
+
+    if (![1, 2].includes(idRolNumerico)) {
+      return res.status(400).json({
+        mensaje:
+          'El rol seleccionado no es válido.'
+      })
+    }
 
     let filas
 
-
     if (
-      contrasena &&
+      typeof contrasena === 'string' &&
       contrasena.trim() !== ''
     ) {
 
@@ -196,15 +211,14 @@ const editarUsuario = async (req, res) => {
           10
         )
 
-
       filas =
         await actualizarUsuarioConContrasena(
           req.params.id,
           {
             nombreUsuario,
             correo,
-            contrasena:
-              contrasenaHash
+            contrasena: contrasenaHash,
+            idRol: idRolNumerico
           }
         )
 
@@ -215,32 +229,29 @@ const editarUsuario = async (req, res) => {
           req.params.id,
           {
             nombreUsuario,
-            correo
+            correo,
+            idRol: idRolNumerico
           }
         )
     }
 
-
     if (filas === 0) {
-
       return res.status(404).json({
         mensaje:
           'Usuario no encontrado.'
       })
     }
 
-
-    res.status(200).json({
+    return res.status(200).json({
       mensaje:
         'Usuario actualizado correctamente.'
     })
-
 
   } catch (error) {
 
     console.error(error)
 
-    res.status(500).json({
+    return res.status(500).json({
       mensaje:
         'Error al actualizar el usuario.'
     })
@@ -309,7 +320,7 @@ const iniciarSesion = async (req, res) => {
     const {
       correo,
       contrasena
-    } = req.body
+    } = req.body ?? {}
 
 
     // Validar campos
@@ -353,39 +364,62 @@ const iniciarSesion = async (req, res) => {
       })
     }
 
+    // Verificar que exista la clave JWT
+if (!process.env.JWT_SECRET) {
+  throw new Error('JWT_SECRET no está configurado.')
+}
 
-    // Nunca devolver la contraseña
-    res.status(200).json({
+// Generar token de autenticación
+const token = jwt.sign(
+  {
+    idUsuario: usuario.idUsuario,
+    idRol: usuario.idRol,
+    rol: usuario.rol
+  },
+  process.env.JWT_SECRET,
+  {
+    expiresIn:
+      process.env.JWT_EXPIRES_IN || '8h',
 
-      mensaje:
-        'Inicio de sesión correcto.',
+    algorithm:
+      'HS256'
+  }
+)
+
+        // Nunca devolver la contraseña
+    return res.status(200).json({
+
+      mensaje:'Inicio de sesión correcto.',
+
+      token,
 
       usuario: {
 
-        idUsuario:
-          usuario.idUsuario,
+        idUsuario: usuario.idUsuario,
 
-        nombreUsuario:
-          usuario.nombreUsuario,
+        nombreUsuario: usuario.nombreUsuario,
 
-        correo:
-          usuario.correo
+        correo: usuario.correo,
+
+        idRol: usuario.idRol,
+
+        rol: usuario.rol
 
       }
 
     })
 
 
-  } catch (error) {
+          } catch (error) {
 
-    console.error(error)
+            console.error(error)
 
-    res.status(500).json({
-      mensaje:
-        'Error al iniciar sesión.'
-    })
-  }
-}
+            res.status(500).json({
+              mensaje:
+                'Error al iniciar sesión.'
+            })
+          }
+        }
 
 export {
   obtenerUsuarios,

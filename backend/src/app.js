@@ -17,7 +17,10 @@ const app = express()
 
 
 app.use(cors({
-  origin: 'http://localhost:5173'
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:4173'
+  ]
 }))
 
 app.use(express.json())
@@ -86,5 +89,47 @@ app.use(
   '/api/reportes',
   reporteRoutes
 )
+
+/**
+ * Manejo global de errores.
+ *
+ * Evita exponer trazas, rutas internas o información técnica
+ * en las respuestas enviadas al cliente.
+ */
+app.use((error, req, res, next) => {
+
+  if (res.headersSent) {
+    return next(error)
+  }
+
+  /**
+   * Controlar JSON mal formado enviado por el cliente.
+   */
+  if (
+    error instanceof SyntaxError &&
+    error.status === 400
+  ) {
+    return res.status(400).json({
+      mensaje:
+        'El cuerpo de la solicitud contiene un JSON inválido.'
+    })
+  }
+
+  /**
+   * Registrar el detalle solamente en el servidor.
+   */
+  console.error(
+    `Error en ${req.method} ${req.originalUrl}:`,
+    error.message
+  )
+
+  /**
+   * Entregar una respuesta genérica al cliente.
+   */
+  return res.status(500).json({
+    mensaje:
+      'Ocurrió un error interno en el servidor.'
+  })
+})
 
 export default app
