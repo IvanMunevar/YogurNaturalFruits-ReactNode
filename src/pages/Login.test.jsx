@@ -127,12 +127,16 @@ describe('Componente Login', () => {
       userEvent.setup()
 
     const usuario = {
-      idUsuario: 1,
-      nombre: 'Juan Gonzalez'
-    }
+    idUsuario: 1,
+    nombreUsuario: 'Juan Prueba',
+    correo: 'juan@naturalfruits.com',
+    idRol: 1,
+    rol: 'ADMINISTRADOR'
+}
 
     iniciarSesion.mockResolvedValue({
-      usuario
+    token: 'token-prueba-administrador',
+    usuario
     })
 
     renderizarLogin()
@@ -177,6 +181,8 @@ describe('Componente Login', () => {
     ).toBe(
       JSON.stringify(usuario)
     )
+    expect(sessionStorage.getItem('usuario')).toBe(JSON.stringify(usuario))
+    expect(sessionStorage.getItem('token')).toBe('token-prueba-administrador')
   })
 
 

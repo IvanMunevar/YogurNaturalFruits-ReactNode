@@ -1,6 +1,20 @@
 const API_URL =
   'http://localhost:3000/api/usuarios'
 
+const obtenerToken = () => {
+
+  const token =
+    sessionStorage.getItem('token')
+
+  if (!token) {
+    throw new Error(
+      'No existe una sesión activa.'
+    )
+  }
+
+  return token
+}
+
 // =========================
 // INICIAR SESIÓN
 // =========================
@@ -50,7 +64,14 @@ const iniciarSesion = async (
 
 const obtenerUsuarios = async () => {
 
-  const respuesta = await fetch(API_URL)
+  const respuesta = await fetch( API_URL,
+  {
+    headers: {
+      Authorization:
+        `Bearer ${obtenerToken()}`
+    }
+  }
+)
 
   const datos = await respuesta.json()
 
@@ -78,8 +99,10 @@ const crearUsuario = async (usuario) => {
       method: 'POST',
 
       headers: {
-        'Content-Type': 'application/json'
-      },
+  'Content-Type': 'application/json',
+  Authorization:
+    `Bearer ${obtenerToken()}`
+},
 
       body: JSON.stringify(usuario)
     }
@@ -114,8 +137,10 @@ const actualizarUsuario = async (
       method: 'PUT',
 
       headers: {
-        'Content-Type': 'application/json'
-      },
+  'Content-Type': 'application/json',
+  Authorization:
+    `Bearer ${obtenerToken()}`
+},
 
       body: JSON.stringify(usuario)
     }
@@ -144,11 +169,16 @@ const eliminarUsuario = async (
 ) => {
 
   const respuesta = await fetch(
-    `${API_URL}/${idUsuario}`,
-    {
-      method: 'DELETE'
+  `${API_URL}/${idUsuario}`,
+  {
+    method: 'DELETE',
+
+    headers: {
+      Authorization:
+        `Bearer ${obtenerToken()}`
     }
-  )
+  }
+)
 
   const datos = await respuesta.json()
 

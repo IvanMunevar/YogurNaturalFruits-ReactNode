@@ -1,7 +1,28 @@
 import { NavLink } from 'react-router-dom'
 import logo from '../assets/img/logo.png'
 
+const obtenerUsuario = () => {
+  try {
+    const usuarioGuardado = sessionStorage.getItem('usuario')
+    return usuarioGuardado
+      ? JSON.parse(usuarioGuardado)
+      : null
+  } catch {
+    return null
+  }
+}
+
+
 function Sidebar() {
+  
+  const usuario = obtenerUsuario()
+  const rol = String(usuario?.rol || '')
+    .trim()
+    .toUpperCase()
+
+  const esAdministrador =
+    rol === 'ADMINISTRADOR'
+  
   return (
     <aside className="sidebar">
 
@@ -94,13 +115,16 @@ function Sidebar() {
                <span>⚠️</span> Alertas</NavLink>
 
 
+            {esAdministrador && (
           <NavLink
-            to="/usuarios"
-            className={({ isActive }) =>
-            isActive ? 'menu-item activo' : 'menu-item'
-          }
-        >
-              <span>👥</span>Usuarios</NavLink>
+              to="/usuarios"
+              className={({ isActive }) =>
+                isActive ? 'menu-item activo' : 'menu-item'
+              }
+            >
+              <span>👥</span>Usuarios
+            </NavLink>
+          )}
 
           <NavLink
           to="/reportes"

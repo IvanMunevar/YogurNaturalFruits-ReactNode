@@ -59,14 +59,28 @@ function Login() {
         )
 
 
-      // Guardar datos básicos
-      // del usuario autenticado
-      sessionStorage.setItem(
-        'usuario',
-        JSON.stringify(
-          respuesta.usuario
-        )
-      )
+      // Verificar respuesta del backend
+      if (
+      !respuesta.token ||
+  !respuesta.usuario
+      ) {
+  throw new Error(
+    'La respuesta de autenticación no es válida.'
+  )
+}
+
+// Guardar token y usuario autenticado
+  sessionStorage.setItem(
+  'token',
+  respuesta.token
+)
+
+sessionStorage.setItem(
+  'usuario',
+  JSON.stringify(
+    respuesta.usuario
+  )
+)   
 
 
       // Ir al Dashboard

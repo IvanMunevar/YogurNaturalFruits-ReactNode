@@ -29,13 +29,12 @@ function Usuarios() {
 
 
   const [formulario, setFormulario] =
-    useState({
-
-      nombreUsuario: '',
-      correo: '',
-      contrasena: ''
-
-    })
+  useState({
+    nombreUsuario: '',
+    correo: '',
+    contrasena: '',
+    idRol: '2'
+  })
 
 
   // =========================
@@ -106,13 +105,12 @@ function Usuarios() {
 
   const limpiarFormulario = () => {
 
-    setFormulario({
-
-      nombreUsuario: '',
-      correo: '',
-      contrasena: ''
-
-    })
+  setFormulario({
+  nombreUsuario: '',
+  correo: '',
+  contrasena: '',
+  idRol: '2'
+})
 
     setEditandoId(null)
   }
@@ -156,16 +154,11 @@ function Usuarios() {
 
 
     const usuario = {
-
-      nombreUsuario:
-        formulario.nombreUsuario,
-
-      correo:
-        formulario.correo,
-
-      contrasena:
-        formulario.contrasena
-    }
+  nombreUsuario: formulario.nombreUsuario,
+  correo: formulario.correo,
+  contrasena: formulario.contrasena,
+  idRol: Number(formulario.idRol)
+}
 
 
     try {
@@ -216,17 +209,11 @@ function Usuarios() {
   ) => {
 
     setFormulario({
-
-      nombreUsuario:
-        usuario.nombreUsuario,
-
-      correo:
-        usuario.correo || '',
-
-      // Se deja vacía por seguridad.
-      contrasena: ''
-
-    })
+  nombreUsuario: usuario.nombreUsuario,
+  correo: usuario.correo || '',
+  contrasena: '',
+  idRol: String(usuario.idRol || 2)
+})
 
 
     setEditandoId(
@@ -357,7 +344,7 @@ function Usuarios() {
           </div>
 
 
-          <div className="campo-usuario">
+                    <div className="campo-usuario">
 
             <label>
               Correo electrónico *
@@ -367,9 +354,7 @@ function Usuarios() {
               type="email"
               name="correo"
               placeholder="usuario@correo.com"
-              value={
-                formulario.correo
-              }
+              value={formulario.correo}
               onChange={manejarCambio}
             />
 
@@ -380,9 +365,7 @@ function Usuarios() {
 
             <label>
               Contraseña
-              {editandoId === null
-                ? ' *'
-                : ''}
+              {editandoId === null ? ' *' : ''}
             </label>
 
             <input
@@ -393,11 +376,32 @@ function Usuarios() {
                   ? 'Dejar vacío para conservar'
                   : 'Ingrese una contraseña'
               }
-              value={
-                formulario.contrasena
-              }
+              value={formulario.contrasena}
               onChange={manejarCambio}
             />
+
+          </div>
+
+
+          <div className="campo-usuario">
+
+            <label>
+              Rol *
+            </label>
+
+            <select
+              name="idRol"
+              value={formulario.idRol}
+              onChange={manejarCambio}
+            >
+              <option value="2">
+                EMPLEADO
+              </option>
+
+              <option value="1">
+                ADMINISTRADOR
+              </option>
+            </select>
 
           </div>
 
@@ -489,6 +493,10 @@ function Usuarios() {
                 </th>
 
                 <th>
+                  Rol
+                </th>
+
+                <th>
                   Contraseña
                 </th>
 
@@ -508,7 +516,7 @@ function Usuarios() {
                 <tr>
 
                   <td
-                    colSpan="5"
+                    colSpan="6"
                     className="sin-usuarios"
                   >
                     No hay usuarios registrados.
@@ -538,6 +546,10 @@ function Usuarios() {
                       <td>
                         {usuario.correo ||
                           'Sin correo'}
+                      </td>
+
+                      <td>
+                        {usuario.rol || 'Sin rol'}
                       </td>
 
                       <td>

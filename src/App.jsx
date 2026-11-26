@@ -14,10 +14,11 @@ import Usuarios from './pages/Usuarios'
 import Clientes from './pages/Clientes'
 import Pedidos from './pages/Pedidos'
 import Ventas from './pages/Ventas'
-import Reportes from './pages/Reportes' 
+import Reportes from './pages/Reportes'
 import Alertas from './pages/Alertas'
 
 import Layout from './components/Layout'
+import RutaProtegida from './components/RutaProtegida'
 
 function App() {
 
@@ -32,63 +33,81 @@ function App() {
           element={<Login />}
         />
 
-        {/* SISTEMA */}
-        <Route element={<Layout />}>
+        {/* RUTAS QUE REQUIEREN INICIO DE SESIÓN */}
+        <Route element={<RutaProtegida />}>
 
-          <Route
-            path="/dashboard"
-            element={<Dashboard />}
-          />
+          {/* ESTRUCTURA GENERAL DEL SISTEMA */}
+          <Route element={<Layout />}>
 
-          <Route
-            path="/inventario"
-            element={<Inventario />}
-          />
+            <Route
+              path="/dashboard"
+              element={<Dashboard />}
+            />
 
-          <Route
-            path="/productos"
-            element={<Productos />}
-          />
+            <Route
+              path="/inventario"
+              element={<Inventario />}
+            />
 
-          <Route
-            path="/insumos"
-            element={<Insumos />}
-          />
+            <Route
+              path="/productos"
+              element={<Productos />}
+            />
 
-          <Route
-            path="/proveedores"
-            element={<Proveedores />}
-          />
+            <Route
+              path="/insumos"
+              element={<Insumos />}
+            />
 
-          <Route
-            path="/clientes"
-            element={<Clientes />}
-          />
+            <Route
+              path="/proveedores"
+              element={<Proveedores />}
+            />
 
-          <Route
-            path="/ventas"
-            element={<Ventas />}
-          />
-          
-          <Route
-            path="/alertas"
-            element={<Alertas />}
-          />
+            <Route
+              path="/clientes"
+              element={<Clientes />}
+            />
 
-          <Route
-            path="/usuarios"
-            element={<Usuarios />}
-          />
+            <Route
+              path="/ventas"
+              element={<Ventas />}
+            />
 
-          <Route
-            path="/pedidos"
-            element={<Pedidos />}
-          />
+            <Route
+              path="/alertas"
+              element={<Alertas />}
+            />
 
-          <Route
-            path="/reportes"
-            element={<Reportes />}
-          />
+            <Route
+              path="/pedidos"
+              element={<Pedidos />}
+            />
+
+            <Route
+              path="/reportes"
+              element={<Reportes />}
+            />
+
+            {/* SOLO ADMINISTRADORES */}
+            <Route
+              element={
+                <RutaProtegida
+                  rolesPermitidos={[
+                    'ADMINISTRADOR'
+                  ]}
+                />
+              }
+            >
+
+              <Route
+                path="/usuarios"
+                element={<Usuarios />}
+              />
+
+            </Route>
+
+          </Route>
 
         </Route>
 
